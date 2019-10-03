@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using ZenStore.Models;
 
 namespace ZenStore.Interfaces
@@ -10,5 +12,8 @@ namespace ZenStore.Interfaces
         bool Canceled { get; set; }
         bool Shipped { get; set; }
         decimal Total { get; }
+        DateTime OrderIn { get; set; }
+        DateTime? OrderFulfilled { get; set; }
+        DateTime? OrderCanceled { get; set; }
     }
 }
