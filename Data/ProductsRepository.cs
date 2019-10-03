@@ -40,6 +40,20 @@ namespace ZenStore.Data
             return product;
         }
 
+        public bool Edit(Product product)
+        {
+            var nRows = _db.Execute(@"
+                UPDATE products SET 
+                id = @Id, 
+                name = @Name, 
+                description = @Description, 
+                price = @Price
+                WHERE id = @Id;",
+                product);
+
+            return nRows == 1;
+        }
+
         public ProductsRepository(IDbConnection db)
         {
             _db = db;
