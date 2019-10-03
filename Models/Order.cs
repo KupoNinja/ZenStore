@@ -7,6 +7,7 @@ namespace ZenStore.Models
 {
     public class Order : IOrder
     {
+        public string Id { get; set; }
         public string Name { get; set; }
         public List<Product> Products { get; set; }
         public bool Canceled { get; set; }
