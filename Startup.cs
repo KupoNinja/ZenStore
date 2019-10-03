@@ -14,6 +14,8 @@ using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
+using ZenStore.Data;
+using ZenStore.Services;
 
 namespace ZenStore
 {
@@ -30,6 +32,11 @@ namespace ZenStore
         public void ConfigureServices(IServiceCollection services)
         {
             AddDefaultServices(services);
+
+            services.AddScoped<IDbConnection>(o => CreateDbConnection());
+
+            services.AddTransient<ProductsRepository>();
+            services.AddTransient<ProductsService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
