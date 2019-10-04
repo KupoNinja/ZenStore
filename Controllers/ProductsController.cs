@@ -39,12 +39,39 @@ namespace ZenStore.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Product> Post([FromBody] Product productData)
+        public ActionResult<Product> Create([FromBody] Product productData)
         {
             try
             {
                 Product product = _ps.AddProduct(productData);
                 return Created("api/products/" + product.Id, product);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPut("{id}")]
+        public ActionResult<Product> Edit(string id, [FromBody] Product productData)
+        {
+            try
+            {
+                productData.Id = id;
+                return Ok(_ps.EditProduct(productData));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult<string> Delete(string id)
+        {
+            try
+            {
+                return Ok(_ps.RemoveProduct(id));
             }
             catch (Exception e)
             {

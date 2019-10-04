@@ -41,7 +41,7 @@ namespace ZenStore
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
-        private static void AddDefaultServices(IServiceCollection services)
+        private void AddDefaultServices(IServiceCollection services)
         {
             services.AddSwaggerGen(c =>
             {

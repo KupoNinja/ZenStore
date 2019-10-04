@@ -18,7 +18,7 @@ namespace ZenStore.Services
         public Product GetProductById(string id)
         {
             var product = _repo.GetById(id);
-            if (product == null) { throw new Exception("You're taking empty mind too far. This ID doesn't even exist."); }
+            if (product == null) { throw new Exception("You're taking empty mind too far. This product doesn't even exist."); }
 
             return product;
         }
@@ -32,6 +32,25 @@ namespace ZenStore.Services
             _repo.Create(productData);
 
             return productData;
+        }
+
+        public Product EditProduct(Product productData)
+        {
+            var product = _repo.GetById(productData.Id);
+            if (product == null) { throw new Exception("You're taking empty mind too far. This product doesn't even exist."); }
+            product.Name = productData.Name;
+            product.Description = productData.Description;
+
+            return _repo.Edit(product);
+        }
+
+        public string RemoveProduct(string id)
+        {
+            var product = _repo.GetById(id);
+            var deleted = _repo.Delete(id);
+            if (!deleted) { throw new Exception("The feng shui is off. We're unable to remove this product."); }
+
+            return id;
         }
 
         public ProductsService(ProductsRepository repo)

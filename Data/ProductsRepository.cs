@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Data;
 using Dapper;
@@ -40,7 +41,7 @@ namespace ZenStore.Data
             return product;
         }
 
-        public bool Edit(Product product)
+        public Product Edit(Product product)
         {
             var nRows = _db.Execute(@"
                 UPDATE products SET 
@@ -51,7 +52,17 @@ namespace ZenStore.Data
                 WHERE id = @Id;",
                 product);
 
-            return nRows == 1;
+            return product;
+        }
+
+        public bool Delete(string id)
+        {
+            var success = _db.Execute(@"DELETE FROM products WHERE id = @Id", new { id });
+            if (success == 1)
+            {
+                return true;
+            }
+            return false;
         }
 
         public ProductsRepository(IDbConnection db)
