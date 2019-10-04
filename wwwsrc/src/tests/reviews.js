@@ -59,7 +59,8 @@ export class ReviewsSuite extends Suite {
         "Get Reviews for Product",
         "products/:id/reviews",
         async () => {
-          let reviews = await api.get("products/" + this.product.id + "/reviews")
+          let res = await api.get("products/" + this.product.id + "/reviews")
+          let reviews = res.data
           if (!Array.isArray(reviews)) {
             throw new Error("Unable to get product reviews")
           }

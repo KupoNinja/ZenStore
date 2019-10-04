@@ -25,8 +25,8 @@ namespace ZenStore.Services
 
         public Product AddProduct(Product productData)
         {
-            var exists = _repo.GetByName(productData.Name);
-            if (exists != null) { throw new Exception("Clear your thoughts. This product already exists."); }
+            // var exists = _repo.GetByName(productData.Name);
+            // if (exists != null) { throw new Exception("Clear your thoughts. This product already exists."); }
 
             productData.Id = Guid.NewGuid().ToString();
             _repo.Create(productData);

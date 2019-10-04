@@ -18,7 +18,7 @@ namespace ZenStore.Data
         public Review GetById(string id)
         {
             return _db.QueryFirstOrDefault<Review>(
-                "SELECT * FROM review WHERE id = @id",
+                "SELECT * FROM reviews WHERE id = @id",
                 new { id }
             );
         }
@@ -34,8 +34,8 @@ namespace ZenStore.Data
         public Review Create(Review review)
         {
             var sql = @"
-                INSERT INTO reviews (id, name, description, rating)
-                VALUES (@Id, @Name, @Description, @Rating);";
+                INSERT INTO reviews (id, name, description, rating, productid)
+                VALUES (@Id, @Name, @Description, @Rating, @ProductId);";
             var nRows = _db.Execute(sql, review);
 
             return review;
