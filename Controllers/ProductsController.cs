@@ -10,6 +10,7 @@ namespace ZenStore.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
+        private readonly ReviewsService _rs;
         private readonly ProductsService _ps;
 
         [HttpGet]
@@ -31,6 +32,19 @@ namespace ZenStore.Controllers
             try
             {
                 return Ok(_ps.GetProductById(id));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet("{id}/reviews")]
+        public ActionResult<Review> GetReviews(string id)
+        {
+            try
+            {
+                return Ok(_rs.GetReviewsByProduct(id));
             }
             catch (Exception e)
             {
@@ -79,8 +93,9 @@ namespace ZenStore.Controllers
             }
         }
 
-        public ProductsController(ProductsService ps)
+        public ProductsController(ProductsService ps, ReviewsService rs)
         {
+            _rs = rs;
             _ps = ps;
         }
     }
