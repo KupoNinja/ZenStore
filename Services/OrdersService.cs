@@ -23,10 +23,11 @@ namespace ZenStore.Services
             return order;
         }
 
-        //NOTE Work on this
+        //NOTE Add Products to Order
         public Order AddOrder(Order orderData)
         {
             orderData.Id = Guid.NewGuid().ToString();
+            orderData.OrderIn = DateTime.Now;
             _repo.Create(orderData);
 
             return orderData;

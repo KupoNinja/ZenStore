@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS orders (
     canceled TINYINT,
     shipped TINYINT,
     orderin DATETIME NOT NULL,
-    orderfulfilled DATETIME,
+    ordershipped DATETIME,
     ordercanceled DATETIME,
 
     PRIMARY KEY(id)

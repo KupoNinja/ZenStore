@@ -27,8 +27,8 @@ namespace ZenStore.Data
         public Order Create(Order order)
         {
             var sql = @"
-                INSERT INTO orders (id, name, description, rating, productid)
-                VALUES (@Id, @Name, @Description, @Rating, @ProductId);";
+                INSERT INTO orders (id, name, orderin, )
+                VALUES (@Id, @Name, @OrderIn);";
             var nRows = _db.Execute(sql, order);
 
             return order;
