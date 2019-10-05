@@ -33,7 +33,7 @@ namespace ZenStore.Data
             return order;
         }
 
-        public void CreateOrderItem(OrderProduct orderProduct)
+        public void CreateOrderProduct(OrderProduct orderProduct)
         {
             var sql = @"
             INSERT INTO orderproducts (id, orderid, productid)

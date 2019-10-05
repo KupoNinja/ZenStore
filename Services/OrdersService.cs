@@ -53,7 +53,7 @@ namespace ZenStore.Services
             {
                 orderProduct.Id = Guid.NewGuid().ToString();
                 orderProduct.ProductId = p.Id;
-                _repo.CreateOrderItem(orderProduct);
+                _repo.CreateOrderProduct(orderProduct);
             });
         }
 
