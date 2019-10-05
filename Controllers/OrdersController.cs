@@ -53,12 +53,40 @@ namespace ZenStore.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult<Order> Edit(string id, [FromBody] Order orderData)
+        public ActionResult<Order> AddProductsToOrder(string id, [FromBody] Order orderData)
         {
             try
             {
                 orderData.Id = id;
-                return Ok(_os.EditOrder(orderData));
+                return Ok(_os.AddProductsToOrder(orderData));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPut("{id}/ship")]
+        public ActionResult<Order> ShipOrder(string id, [FromBody] Order orderData)
+        {
+            try
+            {
+                orderData.Id = id;
+                return Ok(_os.ShipOrder(orderData));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPut("{id}/cancel")]
+        public ActionResult<Order> CancelOrder(string id, [FromBody] Order orderData)
+        {
+            try
+            {
+                orderData.Id = id;
+                return Ok(_os.CancelOrder(orderData));
             }
             catch (Exception e)
             {

@@ -45,7 +45,12 @@ namespace ZenStore.Data
         {
             var sql = @"
                 UPDATE orders SET  
-                name = @Name
+                name = @Name,
+                canceled = @Canceled,
+                shipped = @Shipped,
+                orderin = @OrderIn,
+                ordershipped = @OrderShipped,
+                ordercanceled = @OrderCanceled
                 WHERE id = @Id;";
             _db.Execute(sql, order);
 
@@ -56,5 +61,6 @@ namespace ZenStore.Data
         {
             _db = db;
         }
+
     }
 }

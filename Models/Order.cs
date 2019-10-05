@@ -15,7 +15,7 @@ namespace ZenStore.Models
 
         public decimal Total { get { return Products.Sum(p => p.Price); } }
         public DateTime OrderIn { get; set; }
-        public DateTime? OrderFulfilled { get; set; }
+        public DateTime? OrderShipped { get; set; }
         public DateTime? OrderCanceled { get; set; }
     }
 }

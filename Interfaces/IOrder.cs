@@ -14,7 +14,7 @@ namespace ZenStore.Interfaces
         bool Shipped { get; set; }
         decimal Total { get; }
         DateTime OrderIn { get; set; }
-        DateTime? OrderFulfilled { get; set; }
+        DateTime? OrderShipped { get; set; }
         DateTime? OrderCanceled { get; set; }
     }
 }

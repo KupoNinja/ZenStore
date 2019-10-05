@@ -23,7 +23,6 @@ namespace ZenStore.Services
             return order;
         }
 
-        //NOTE Add Products to Order
         public Order AddOrder(Order orderData)
         {
             orderData.Id = Guid.NewGuid().ToString();
@@ -34,15 +33,43 @@ namespace ZenStore.Services
             return orderData;
         }
 
-        public Order EditOrder(Order orderData)
+        public Order AddProductsToOrder(Order orderData)
         {
             var order = _repo.GetById(orderData.Id);
             if (order == null) { throw new Exception("You're taking empty mind too far. This order doesn't even exist."); }
-            if (order.Shipped || order.Canceled) { throw new Exception("This order has come and gone like thoughts in the wind. You cannot change it."); }
-            order.Name = orderData.Name;
+            var validOrder = CheckCanceledOrShipped(order);
+            validOrder.Name = orderData.Name;
             AddOrderProducts(orderData);
 
             return _repo.Edit(order);
+        }
+
+        public Order ShipOrder(Order orderData)
+        {
+            var order = _repo.GetById(orderData.Id);
+            if (order == null) { throw new Exception("You're taking empty mind too far. This order doesn't even exist."); }
+            var validOrder = CheckCanceledOrShipped(order);
+            validOrder.OrderShipped = DateTime.Now;
+            validOrder.Shipped = true;
+
+            return _repo.Edit(validOrder);
+        }
+
+        public Order CancelOrder(Order orderData)
+        {
+            var order = _repo.GetById(orderData.Id);
+            if (order == null) { throw new Exception("You're taking empty mind too far. This order doesn't even exist."); }
+            var validOrder = CheckCanceledOrShipped(order);
+            validOrder.OrderCanceled = DateTime.Now;
+            validOrder.Canceled = true;
+
+            return _repo.Edit(validOrder);
+        }
+
+        public Order CheckCanceledOrShipped(Order orderData)
+        {
+            if (orderData.Shipped || orderData.Canceled) { throw new Exception("This order has come and gone like thoughts in the wind. You cannot change it."); }
+            return orderData;
         }
 
         public void AddOrderProducts(Order orderData)
