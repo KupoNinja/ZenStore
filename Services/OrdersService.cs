@@ -28,6 +28,7 @@ namespace ZenStore.Services
         {
             orderData.Id = Guid.NewGuid().ToString();
             orderData.OrderIn = DateTime.Now;
+            _repo.Create(orderData);
             AddOrderProducts(orderData);
 
             return orderData;
@@ -48,7 +49,6 @@ namespace ZenStore.Services
             var orderProduct = new OrderProduct();
             orderProduct.OrderId = orderData.Id;
 
-            _repo.Create(orderData);
             orderData.Products.ForEach(p =>
             {
                 orderProduct.Id = Guid.NewGuid().ToString();
