@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS reviews (
     id VARCHAR(255) NOT NULL,
     name VARCHAR(255) NOT NULL,
     description VARCHAR(255),
-    rating DOUBLE NOT NULL,
+    rating DOUBLE NOT NULL DEFAULT 5,
     productid VARCHAR(255) NOT NULL,
 
     PRIMARY KEY(id),
@@ -22,8 +22,8 @@ CREATE TABLE IF NOT EXISTS reviews (
 CREATE TABLE IF NOT EXISTS orders (
     id VARCHAR(255) NOT NULL,
     name VARCHAR(255) NOT NULL,
-    canceled TINYINT,
-    shipped TINYINT,
+    canceled TINYINT DEFAULT 0,
+    shipped TINYINT DEFAULT 0,
     orderin DATETIME NOT NULL,
     ordershipped DATETIME,
     ordercanceled DATETIME,

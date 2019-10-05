@@ -36,21 +36,21 @@ namespace ZenStore.Data
             var sql = @"
                 INSERT INTO products (id, name, description, price)
                 VALUES (@Id, @Name, @Description, @Price);";
-            var nRows = _db.Execute(sql, product);
+            _db.Execute(sql, product);
 
             return product;
         }
 
         public Product Edit(Product product)
         {
-            var nRows = _db.Execute(@"
+            var sql = @"
                 UPDATE products SET 
                 id = @Id, 
                 name = @Name, 
                 description = @Description, 
                 price = @Price
-                WHERE id = @Id;",
-                product);
+                WHERE id = @Id;";
+            _db.Execute(sql, product);
 
             return product;
         }

@@ -28,7 +28,6 @@ namespace ZenStore.Services
         {
             orderData.Id = Guid.NewGuid().ToString();
             orderData.OrderIn = DateTime.Now;
-
             AddOrderProducts(orderData);
 
             return orderData;
@@ -39,7 +38,6 @@ namespace ZenStore.Services
             var order = _repo.GetById(orderData.Id);
             if (order == null) { throw new Exception("You're taking empty mind too far. This order doesn't even exist."); }
             order.Name = orderData.Name;
-
             AddOrderProducts(orderData);
 
             return _repo.Edit(order);

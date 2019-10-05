@@ -43,13 +43,14 @@ namespace ZenStore.Data
 
         public Review Edit(Review review)
         {
-            _db.Execute(@"
+            var sql = @"
                 UPDATE reviews SET 
                 id = @Id, 
                 name = @Name, 
                 description = @Description, 
                 rating = @Rating
-                WHERE id = @Id;",
+                WHERE id = @Id;";
+            _db.Execute(sql,
                 review);
 
             return review;
