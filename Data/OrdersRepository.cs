@@ -45,7 +45,6 @@ namespace ZenStore.Data
         {
             var sql = @"
                 UPDATE orders SET  
-                id = @Id,
                 name = @Name
                 WHERE id = @Id;";
             _db.Execute(sql, order);

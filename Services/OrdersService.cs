@@ -38,6 +38,7 @@ namespace ZenStore.Services
         {
             var order = _repo.GetById(orderData.Id);
             if (order == null) { throw new Exception("You're taking empty mind too far. This order doesn't even exist."); }
+            if (order.Shipped || order.Canceled) { throw new Exception("This order has come and gone like thoughts in the wind. You cannot change it."); }
             order.Name = orderData.Name;
             AddOrderProducts(orderData);
 

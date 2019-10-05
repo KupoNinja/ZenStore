@@ -45,7 +45,6 @@ namespace ZenStore.Data
         {
             var sql = @"
                 UPDATE products SET 
-                id = @Id, 
                 name = @Name, 
                 description = @Description, 
                 price = @Price
@@ -58,10 +57,8 @@ namespace ZenStore.Data
         public bool Delete(string id)
         {
             var success = _db.Execute(@"DELETE FROM products WHERE id = @Id", new { id });
-            if (success == 1)
-            {
-                return true;
-            }
+            if (success == 1) { return true; }
+
             return false;
         }
 

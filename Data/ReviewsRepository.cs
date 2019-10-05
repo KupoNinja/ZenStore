@@ -45,13 +45,11 @@ namespace ZenStore.Data
         {
             var sql = @"
                 UPDATE reviews SET 
-                id = @Id, 
                 name = @Name, 
                 description = @Description, 
                 rating = @Rating
                 WHERE id = @Id;";
-            _db.Execute(sql,
-                review);
+            _db.Execute(sql, review);
 
             return review;
         }
