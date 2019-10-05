@@ -33,15 +33,20 @@ namespace ZenStore.Services
             return orderData;
         }
 
-        public Order AddProductsToOrder(Order orderData)
+        public Order EditOrder(Order orderData)
         {
             var order = _repo.GetById(orderData.Id);
             if (order == null) { throw new Exception("You're taking empty mind too far. This order doesn't even exist."); }
-            order.Name = orderData.Name;
-            order.Products = orderData.Products;
-            AddOrderProducts(order);
+            var validOrder = CheckCanceledOrShipped(order);
+            validOrder.Name = orderData.Name;
+            validOrder.Products = orderData.Products;
+            validOrder.Canceled = false;
+            validOrder.Shipped = false;
+            validOrder.OrderShipped = null;
+            validOrder.OrderCanceled = null;
+            AddOrderProducts(validOrder);
 
-            return _repo.Edit(order);
+            return _repo.Edit(validOrder);
         }
 
         public Order ShipOrder(Order orderData)

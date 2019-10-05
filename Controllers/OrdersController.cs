@@ -53,12 +53,12 @@ namespace ZenStore.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult<Order> AddProductsToOrder(string id, [FromBody] Order orderData)
+        public ActionResult<Order> EditOrder(string id, [FromBody] Order orderData)
         {
             try
             {
                 orderData.Id = id;
-                return Ok(_os.AddProductsToOrder(orderData));
+                return Ok(_os.EditOrder(orderData));
             }
             catch (Exception e)
             {
