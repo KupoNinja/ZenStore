@@ -25,7 +25,6 @@ namespace ZenStore.Services
 
         public List<Review> GetReviewsByProduct(string id)
         {
-            // NOTE Need checks here?
             return _repo.GetAllByProduct(id).ToList();
         }
 
@@ -46,16 +45,6 @@ namespace ZenStore.Services
 
             return _repo.Edit(review);
         }
-
-        // Not needed per requirements
-        // public string RemoveReview(string id)
-        // {
-        //     var review = _repo.GetById(id);
-        //     var deleted = _repo.Delete(id);
-        //     if (!deleted) { throw new Exception("The feng shui is off. We're unable to remove this review."); }
-
-        //     return id;
-        // }
 
         public ReviewsService(ReviewsRepository repo)
         {

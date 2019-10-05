@@ -23,28 +23,34 @@ namespace ZenStore.Data
             );
         }
 
-        //NOTE Get Products in here
         public Order Create(Order order)
         {
             var sql = @"
-                INSERT INTO orders (id, name, orderin, )
+                INSERT INTO orders (id, name, orderin)
                 VALUES (@Id, @Name, @OrderIn);";
-            var nRows = _db.Execute(sql, order);
+            _db.Execute(sql, order);
 
             return order;
         }
 
-        //NOTE Get Products in here
+        public void CreateOrderItem(OrderProduct orderProduct)
+        {
+            var sql = @"
+            INSERT INTO orderproducts (id, orderid, productid)
+            VALUES (@Id, @OrderId, @ProductId);";
+            _db.Execute(sql, orderProduct);
+        }
+
         public Order Edit(Order order)
         {
-            var nRows = _db.Execute(@"
+            var sql = @"
                 UPDATE orders SET 
                 id = @Id, 
                 name = @Name, 
                 description = @Description, 
                 rating = @Rating
-                WHERE id = @Id;",
-                order);
+                WHERE id = @Id;";
+            _db.Execute(sql, order);
 
             return order;
         }

@@ -36,14 +36,14 @@ namespace ZenStore.Data
             var sql = @"
                 INSERT INTO reviews (id, name, description, rating, productid)
                 VALUES (@Id, @Name, @Description, @Rating, @ProductId);";
-            var nRows = _db.Execute(sql, review);
+            _db.Execute(sql, review);
 
             return review;
         }
 
         public Review Edit(Review review)
         {
-            var nRows = _db.Execute(@"
+            _db.Execute(@"
                 UPDATE reviews SET 
                 id = @Id, 
                 name = @Name, 
@@ -54,17 +54,6 @@ namespace ZenStore.Data
 
             return review;
         }
-
-        // NOTE Not needed per requirements
-        // public bool Delete(string id)
-        // {
-        //     var success = _db.Execute(@"DELETE FROM reviews WHERE id = @Id", new { id });
-        //     if (success == 1)
-        //     {
-        //         return true;
-        //     }
-        //     return false;
-        // }
 
         public ReviewsRepository(IDbConnection db)
         {

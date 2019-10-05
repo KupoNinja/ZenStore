@@ -42,6 +42,7 @@ namespace ZenStore
             services.AddTransient<ReviewsService>();
 
             services.AddTransient<OrdersRepository>();
+            services.AddTransient<OrdersService>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

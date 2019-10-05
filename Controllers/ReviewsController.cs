@@ -66,20 +66,6 @@ namespace ZenStore.Controllers
             }
         }
 
-        // NOTE Not needed per requirements
-        // [HttpDelete("{id}")]
-        // public ActionResult<string> Delete(string id)
-        // {
-        //     try
-        //     {
-        //         return Ok(_rs.RemoveReview(id));
-        //     }
-        //     catch (Exception e)
-        //     {
-        //         return BadRequest(e.Message);
-        //     }
-        // }
-
         public ReviewsController(ReviewsService rs)
         {
             _rs = rs;

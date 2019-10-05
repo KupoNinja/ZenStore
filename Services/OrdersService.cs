@@ -28,20 +28,35 @@ namespace ZenStore.Services
         {
             orderData.Id = Guid.NewGuid().ToString();
             orderData.OrderIn = DateTime.Now;
-            _repo.Create(orderData);
+
+            AddOrderProducts(orderData);
 
             return orderData;
         }
 
-        //NOTE Work on this
         public Order EditOrder(Order orderData)
         {
             var order = _repo.GetById(orderData.Id);
             if (order == null) { throw new Exception("You're taking empty mind too far. This order doesn't even exist."); }
             order.Name = orderData.Name;
-            // order.Description = orderData.Description;
+
+            AddOrderProducts(orderData);
 
             return _repo.Edit(order);
+        }
+
+        public void AddOrderProducts(Order orderData)
+        {
+            var orderProduct = new OrderProduct();
+            orderProduct.OrderId = orderData.Id;
+
+            _repo.Create(orderData);
+            orderData.Products.ForEach(p =>
+            {
+                orderProduct.Id = Guid.NewGuid().ToString();
+                orderProduct.ProductId = p.Id;
+                _repo.CreateOrderItem(orderProduct);
+            });
         }
 
         public OrdersService(OrdersRepository repo)
