@@ -12,13 +12,13 @@ namespace ZenStore.Data
 
         public IEnumerable<Product> GetAll()
         {
-            return _db.Query<Product>("SELECT * FROM products");
+            return _db.Query<Product>("SELECT * FROM products;");
         }
 
         public Product GetById(string id)
         {
             return _db.QueryFirstOrDefault<Product>(
-                "SELECT * FROM products WHERE id = @id",
+                "SELECT * FROM products WHERE id = @id;",
                 new { id }
             );
         }
@@ -26,7 +26,7 @@ namespace ZenStore.Data
         public Product GetByName(string name)
         {
             return _db.QueryFirstOrDefault<Product>(
-                "SELECT * FROM products WHERE name = @name",
+                "SELECT * FROM products WHERE name = @name;",
                 new { name }
             );
         }

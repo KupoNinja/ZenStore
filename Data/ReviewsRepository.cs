@@ -12,13 +12,13 @@ namespace ZenStore.Data
 
         public IEnumerable<Review> GetAll()
         {
-            return _db.Query<Review>("SELECT * FROM reviews");
+            return _db.Query<Review>("SELECT * FROM reviews;");
         }
 
         public Review GetById(string id)
         {
             return _db.QueryFirstOrDefault<Review>(
-                "SELECT * FROM reviews WHERE id = @id",
+                "SELECT * FROM reviews WHERE id = @id;",
                 new { id }
             );
         }
@@ -26,7 +26,7 @@ namespace ZenStore.Data
         public IEnumerable<Review> GetAllByProduct(string id)
         {
             return _db.Query<Review>(
-                "SELECT * FROM reviews WHERE productid = @id",
+                "SELECT * FROM reviews WHERE productid = @id;",
                 new { id }
             );
         }

@@ -12,15 +12,20 @@ namespace ZenStore.Data
 
         public IEnumerable<Order> GetAll()
         {
-            return _db.Query<Order>("SELECT * FROM orders");
+            return _db.Query<Order>("SELECT * FROM orders;");
         }
 
         public Order GetById(string id)
         {
-            return _db.QueryFirstOrDefault<Order>(
-                "SELECT * FROM order WHERE id = @id",
-                new { id }
-            );
+            // var sql = @"
+            // SELECT o.*, p.Name, p.Price 
+            // FROM orders o
+            // JOIN orderproducts op ON o.id = op.orderid
+            // JOIN products p ON op.productid = p.id
+            // WHERE o.id = @id";
+            var sql = @"SELECT * FROM orders WHERE id = @id;";
+
+            return _db.QueryFirstOrDefault<Order>(sql, new { id });
         }
 
         public Order Create(Order order)
