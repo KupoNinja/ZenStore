@@ -55,7 +55,6 @@ namespace ZenStore.Services
             var validOrder = CheckCanceledOrShipped(order);
             var products = _repo.GetOrderProducts(id).ToList();
             validOrder.Products = products;
-            // validOrder.Products = orderData.Products;
             validOrder.OrderShipped = DateTime.Now;
             validOrder.Shipped = true;
 
