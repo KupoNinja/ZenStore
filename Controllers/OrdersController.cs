@@ -81,12 +81,12 @@ namespace ZenStore.Controllers
         }
 
         [HttpPut("{id}/cancel")]
-        public ActionResult<Order> CancelOrder(string id, [FromBody] Order orderData)
+        public ActionResult<Order> CancelOrder(string id)
         {
             try
             {
-                orderData.Id = id;
-                return Ok(_os.CancelOrder(orderData));
+                // orderData.Id = id;
+                return Ok(_os.CancelOrder(id));
             }
             catch (Exception e)
             {

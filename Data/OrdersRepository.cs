@@ -17,12 +17,6 @@ namespace ZenStore.Data
 
         public Order GetById(string id)
         {
-            // var sql = @"
-            // SELECT o.*, p.Name, p.Price 
-            // FROM orders o
-            // JOIN orderproducts op ON o.id = op.orderid
-            // JOIN products p ON op.productid = p.id
-            // WHERE o.id = @id";
             var sql = @"SELECT * FROM orders WHERE id = @id;";
 
             return _db.QueryFirstOrDefault<Order>(sql, new { id });
@@ -60,6 +54,18 @@ namespace ZenStore.Data
             _db.Execute(sql, order);
 
             return order;
+        }
+
+        public IEnumerable<Product> GetOrderProducts(string id)
+        {
+            var sql = @"
+            SELECT p.* 
+            FROM orders o
+            JOIN orderproducts op ON o.id = op.orderid
+            JOIN products p ON op.productid = p.id
+            WHERE o.id = @id";
+
+            return _db.Query<Product>(sql, new { id });
         }
 
         public OrdersRepository(IDbConnection db)

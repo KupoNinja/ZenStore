@@ -52,19 +52,22 @@ namespace ZenStore.Services
         public Order ShipOrder(string id)
         {
             var order = _repo.GetById(id);
-            if (order == null) { throw new Exception("You're taking empty mind too far. This order doesn't even exist."); }
             var validOrder = CheckCanceledOrShipped(order);
+            var products = _repo.GetOrderProducts(id).ToList();
+            validOrder.Products = products;
+            // validOrder.Products = orderData.Products;
             validOrder.OrderShipped = DateTime.Now;
             validOrder.Shipped = true;
 
             return _repo.Edit(validOrder);
         }
 
-        public Order CancelOrder(Order orderData)
+        public Order CancelOrder(string id)
         {
-            var order = _repo.GetById(orderData.Id);
-            if (order == null) { throw new Exception("You're taking empty mind too far. This order doesn't even exist."); }
+            var order = _repo.GetById(id);
             var validOrder = CheckCanceledOrShipped(order);
+            var products = _repo.GetOrderProducts(id).ToList();
+            validOrder.Products = products;
             validOrder.OrderCanceled = DateTime.Now;
             validOrder.Canceled = true;
 
