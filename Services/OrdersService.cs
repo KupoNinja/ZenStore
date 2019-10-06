@@ -49,9 +49,9 @@ namespace ZenStore.Services
             return _repo.Edit(validOrder);
         }
 
-        public Order ShipOrder(Order orderData)
+        public Order ShipOrder(string id)
         {
-            var order = _repo.GetById(orderData.Id);
+            var order = _repo.GetById(id);
             if (order == null) { throw new Exception("You're taking empty mind too far. This order doesn't even exist."); }
             var validOrder = CheckCanceledOrShipped(order);
             validOrder.OrderShipped = DateTime.Now;

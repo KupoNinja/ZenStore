@@ -67,12 +67,12 @@ namespace ZenStore.Controllers
         }
 
         [HttpPut("{id}/ship")]
-        public ActionResult<Order> ShipOrder(string id, [FromBody] Order orderData)
+        public ActionResult<Order> ShipOrder(string id)
         {
             try
             {
-                orderData.Id = id;
-                return Ok(_os.ShipOrder(orderData));
+                // orderData.Id = id;
+                return Ok(_os.ShipOrder(id));
             }
             catch (Exception e)
             {
