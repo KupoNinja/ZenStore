@@ -12,13 +12,22 @@ namespace ZenStore.Services
 
         public List<Order> GetOrders()
         {
-            return _repo.GetAll().ToList();
+            var orders = _repo.GetAll().ToList();
+            orders.ForEach(o =>
+            {
+                var products = _repo.GetOrderProducts(o.Id).ToList();
+                o.Products = products;
+            });
+
+            return orders;
         }
 
         public Order GetOrderById(string id)
         {
             var order = _repo.GetById(id);
             if (order == null) { throw new Exception("You're taking empty mind too far. This order doesn't even exist."); }
+            var products = _repo.GetOrderProducts(id).ToList();
+            order.Products = products;
 
             return order;
         }

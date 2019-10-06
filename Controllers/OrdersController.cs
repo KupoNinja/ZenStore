@@ -71,7 +71,6 @@ namespace ZenStore.Controllers
         {
             try
             {
-                // orderData.Id = id;
                 return Ok(_os.ShipOrder(id));
             }
             catch (Exception e)
@@ -85,7 +84,6 @@ namespace ZenStore.Controllers
         {
             try
             {
-                // orderData.Id = id;
                 return Ok(_os.CancelOrder(id));
             }
             catch (Exception e)
